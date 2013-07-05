@@ -1,4 +1,4 @@
-package examples {
+package org.ranapat.signals.examples {
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import org.ranapat.signals.Signal;

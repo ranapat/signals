@@ -1,5 +1,6 @@
-package examples {
+package org.ranapat.signals.examples {
 	import flash.events.Event;
+	import flash.utils.Dictionary;
 	import org.ranapat.signals.Signals;
 	import org.ranapat.signals.Slot;
 	
@@ -10,12 +11,14 @@ package examples {
 		private var slot4:Slot = new Slot(handleSignal4);
 		private var slot5:Slot = new Slot(handleSignal5);
 		
+		public static var dictionary:Dictionary = new Dictionary(true);
+		
 		public function ClassB(classA:ClassA, classC:ClassC) {
 			Signals.connect(classA, ClassA.SIGNAL_A, this.slot1, this, 1, false);
 			Signals.connect(classA, ClassA.SIGNAL_A, this.slot2, this, 2, false);
 			Signals.connect(classA, ClassA.SIGNAL_A, this.slot3, this, 3, true);
 			Signals.connect(classA, ClassA.SIGNAL_A, this.slot4, this, 4, false);
-			Signals.connect(classC, ClassC.ENTER_FRAME, this.slot5, this, 0, false);
+			Signals.connect(classC, ClassA.SIGNAL_A, this.slot5, this, 0, false);
 		}
 		
 		public function handleSignal1(param:String):void {

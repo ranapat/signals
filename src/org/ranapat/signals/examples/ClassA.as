@@ -1,4 +1,4 @@
-package examples {
+package org.ranapat.signals.examples {
 	import org.ranapat.signals.Signal;
 	import org.ranapat.signals.Signals;
 	
