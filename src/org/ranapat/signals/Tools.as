@@ -22,11 +22,15 @@ package org.ranapat.signals {
 		}
 		
 		public static function getFunctionName(f:Function):String {
-			var t:Object = getSavedThis(f); 
-			var methods:XMLList = describeType(t)..method.@name;
+			try {
+				var t:Object = getSavedThis(f); 
+				var methods:XMLList = describeType(t)..method.@name;
 
-			for each (var m:String in methods) {
-				if (t.hasOwnProperty(m) && t[m] != null && t[m] === f) return m;            
+				for each (var m:String in methods) {
+					if (t.hasOwnProperty(m) && t[m] != null && t[m] === f) return m;            
+				}
+			} catch (e:Error) {
+				//
 			}
 			
 			return null;                                        

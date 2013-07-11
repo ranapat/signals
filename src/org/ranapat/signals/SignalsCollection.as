@@ -54,7 +54,8 @@ package org.ranapat.signals {
 			var tmp:Vector.<SlotObject> = this.dictionary[signal] as Vector.<SlotObject>;
 			
 			if (tmp) {
-				for (var i:uint = 0; i < tmp.length; ++i) {
+				var length:uint = tmp.length;
+				for (var i:uint = 0; i < length; ++i) {
 					var sTmp:SlotObject = tmp[i];
 					var ssTmp:Slot = sTmp.slot;
 					if (ssTmp != null) {
@@ -62,7 +63,7 @@ package org.ranapat.signals {
 							var sssTmp:Function = ssTmp.getFunction(sTmp.key);
 							sssTmp.apply(null, Tools.arrayToFixedCount(sssTmp.length, parameters));
 						} catch (e:Error) {
-							trace("4:[Signals] Failed to call slot.");
+							trace("4:[Signals] Failed to call slot :: " + e);
 						}
 						if (sTmp.once) {
 							tmp.splice(i, 1);
