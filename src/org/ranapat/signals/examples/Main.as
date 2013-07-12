@@ -86,7 +86,7 @@ package org.ranapat.signals.examples {
 			//Signals.connect(this, this.SignalMainB, new Slot(this.handleSignalMain), this);
 			//Signals.disconnect(this, this.SignalMainB);
 			//Signals.connect(this.classA, this.SignalMainB, new Slot(this.handleSignalMain), this);
-			Signals.emit(this.classA, Main.SignalMainA);
+			Signals.emit(this.classA, Main.SignalMainA, [ 10, 20 ]);
 			
 			//trace("try to emit signal directly :: " + Main.SignalMainA.emit())
 			//trace("try to connect signal directly :: " + this.SignalMainB.connect(this, this.handleSignalMain));

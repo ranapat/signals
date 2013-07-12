@@ -67,18 +67,6 @@ package org.ranapat.signals {
 			return result;
 		}
 		
-		public function dispatch(...args):Boolean {
-			return this.emit(args);
-		}
-		
-		public function add(object:Object, callback:Function, priority:int = 0, once:Boolean = false):Boolean {
-			return this.connect(object, callback, priority, once);
-		}
-		
-		public function remove(slot:Slot = null):Boolean {
-			return this.disconnect(slot);
-		}
-		
 		private function get object():* {
 			if (this.weak) {
 				for (var object:Object in this.weak) {
