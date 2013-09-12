@@ -67,7 +67,7 @@ package org.ranapat.signals {
 			return result;
 		}
 		
-		private function get object():* {
+		private function get object():Object {
 			if (this.weak) {
 				for (var object:Object in this.weak) {
 					return object;
