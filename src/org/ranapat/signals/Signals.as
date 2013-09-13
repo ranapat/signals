@@ -89,6 +89,7 @@ package org.ranapat.signals {
 						try {
 							var _signal:Signal;
 							var _paramParts:Array;
+							var _dictionary:Dictionary;
 							
 							if (
 								metadata.arg.length() == 3
@@ -109,7 +110,6 @@ package org.ranapat.signals {
 								metadata.arg.length() == 1
 								&& metadata.arg[0].@key == Signals.EMITS_META_TAG_VALUES							
 							) {
-								var _dictionary:Dictionary;
 								try {
 									if (object[Signals.DYNAMIC_SIGNALS_DICTIONATY_HOLDER_PARAMETER_NAME] as Dictionary) {
 										_dictionary = object[Signals.DYNAMIC_SIGNALS_DICTIONATY_HOLDER_PARAMETER_NAME] as Dictionary;
@@ -133,7 +133,6 @@ package org.ranapat.signals {
 							} else if (
 								metadata.arg.length() == 0
 							) {
-								var _dictionary:Dictionary;
 								try {
 									if (object[Signals.DYNAMIC_SIGNALS_DICTIONATY_HOLDER_PARAMETER_NAME] as Dictionary) {
 										_dictionary = object[Signals.DYNAMIC_SIGNALS_DICTIONATY_HOLDER_PARAMETER_NAME] as Dictionary;
