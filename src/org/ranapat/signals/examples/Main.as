@@ -80,7 +80,7 @@ package org.ranapat.signals.examples {
 			//dispatchesExample.value = 100;
 			
 			var simpleDispatchExample:SimpleDispatchExample = new SimpleDispatchExample();
-			Signals.link(simpleDispatchExample, simpleDispatchExample.__setValue, this.handleSimpleDispatchExampleSetValue, this);
+			Signals.link(simpleDispatchExample, simpleDispatchExample.__setValue, this.handleSimpleDispatchExampleSetValue);
 			simpleDispatchExample.value = 10;
 			trace("the value is " + simpleDispatchExample.value)
 			

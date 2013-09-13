@@ -1,6 +1,7 @@
 package org.ranapat.signals {
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
+	import flash.sampler.getSavedThis;
 	import flash.system.ApplicationDomain;
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
@@ -164,8 +165,10 @@ package org.ranapat.signals {
 			return result;
 		}
 		
-		public static function link(object:*, member:*, expression:Function, expressionHolder:Object, priority:int = 0, once:Boolean = false):Boolean {
+		public static function link(object:*, member:*, expression:Function, expressionHolder:Object = null, priority:int = 0, once:Boolean = false):Boolean {
 			var result:Boolean = false;
+			
+			expressionHolder = expressionHolder? expressionHolder : getSavedThis(expression);
 			
 			var _memberName:String = MetadataAnalyzer.getMemberName(object, member);
 			var metatags:Vector.<XML> = MetadataAnalyzer.getMetaTags(object, member);
