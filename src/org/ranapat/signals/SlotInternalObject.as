@@ -2,7 +2,6 @@ package org.ranapat.signals {
 	import flash.utils.Dictionary;
 	
 	internal final class SlotInternalObject {
-		
 		public var slot:Slot;
 		public var priority:int;
 		public var once:Boolean;
