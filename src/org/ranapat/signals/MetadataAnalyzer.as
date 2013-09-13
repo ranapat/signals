@@ -2,10 +2,16 @@ package org.ranapat.signals {
 	import flash.utils.describeType;
 	
 	internal class MetadataAnalyzer {
+
+		public static function getMemberName(object:*, member:* = null):String {
+			var _memberName:String = member? member is Function? Tools.getFunctionName(member) : member is String? member : null : null;
+			return (!_memberName && member is Function)? Tools.getVariableName(object, member) : _memberName;
+		}
+		
 		public static function getMetaTags(object:*, member:* = null, all:Boolean = false):Vector.<XML> {
 			var result:Vector.<XML> = new Vector.<XML>();
 			
-			var _memberName:String = member? member is Function? Tools.getFunctionName(member) : member is String? member : null : null;
+			var _memberName:String = MetadataAnalyzer.getMemberName(object, member);
 			var _class:Class = Object(object).constructor;
 			var xDesc:XML = describeType(_class);
 			
