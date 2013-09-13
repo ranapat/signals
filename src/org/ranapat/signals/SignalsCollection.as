@@ -68,6 +68,7 @@ package org.ranapat.signals {
 						if (sTmp.once) {
 							tmp.splice(i, 1);
 							--i;
+							--length;
 						}
 					}
 				}
