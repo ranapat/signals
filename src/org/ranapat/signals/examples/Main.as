@@ -8,6 +8,7 @@ package org.ranapat.signals.examples {
 	import org.ranapat.signals.Signal;
 	import org.ranapat.signals.Signals;
 	import org.ranapat.signals.Slot;
+	import org.ranapat.signals.Tools;
 	
 	[SomethingCustom()]
 	[CustomMeta(param1 = "foo", param2 = "bar")]
@@ -73,20 +74,18 @@ package org.ranapat.signals.examples {
 			
 			//trace("#$$$$$$$$$$$$$$$$$$$$$$$")
 			
-			/*
 			dispatchesExample = new DispatchesExample();
-			trace("link (2) result is " + Signals.link(dispatchesExample, DispatchesExample.ValueChangedSignal.get(Signals.__LINK__), this.handleValueChanged, this));
+			trace("link (2) result is " + Signals.link(dispatchesExample, dispatchesExample.__setValue/*DispatchesExample.ValueChangedSignal.get(Signals.__LINK__)*/, this.handleValueChanged, this));
 			dispatchesExample.doTheTest();
 			dispatchesExample.value = 100;
-			*/
 			
-			Signals.connect(this.classA, Main.SignalMainA, new Slot(this.handleSignalMain), this);
+			//Signals.connect(this.classA, Main.SignalMainA, new Slot(this.handleSignalMain), this);
 			//Signals.connect(this, this.SignalMainB, new Slot(this.handleSignalMain), this);
 			//Signals.connect(this, this.SignalMainB, new Slot(this.handleSignalMain), this);
 			//Signals.connect(this, this.SignalMainB, new Slot(this.handleSignalMain), this);
 			//Signals.disconnect(this, this.SignalMainB);
 			//Signals.connect(this.classA, this.SignalMainB, new Slot(this.handleSignalMain), this);
-			Signals.emit(this.classA, Main.SignalMainA, [ 10, 20 ]);
+			//Signals.emit(this.classA, Main.SignalMainA, [ 10, 20 ]);
 			
 			//trace("try to emit signal directly :: " + Main.SignalMainA.emit())
 			//trace("try to connect signal directly :: " + this.SignalMainB.connect(this, this.handleSignalMain));

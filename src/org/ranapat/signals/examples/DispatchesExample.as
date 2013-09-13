@@ -1,11 +1,15 @@
 package org.ranapat.signals.examples {
+	import flash.utils.Dictionary;
 	import org.ranapat.signals.MetadataAnalyzer;
 	import org.ranapat.signals.Signal;
 	import org.ranapat.signals.Signals;
 	import org.ranapat.signals.Slot;
 	
 	public class DispatchesExample {
-		public static const ValueChangedSignal:Signal = new Signal(null, { key: Signals.__LINK__, value: "__setValue" });
+		public static const ValueChangedSignal:Signal = new Signal(null, { key: Signals.__LINK__, value: "__setValue" } );
+		
+		//public static var __signals__:Dictionary = new Dictionary();
+		public var __signals__:Dictionary = new Dictionary();
 		
 		public var anotherValue:String;
 		
@@ -16,7 +20,10 @@ package org.ranapat.signals.examples {
 		public function get value():int {
 			return this._value;
 		}
-		[Emits(object = "org.ranapat.signals.examples.DispatchesExample", signal = "ValueChangedSignal", values = "value,anotherValue")]
+		//[Emits(object = "org.ranapat.signals.examples.DispatchesExample", signal = "ValueChangedSignal", values = "value,anotherValue")]
+		//[Emits(signal = "ValueChangedSignal", values = "value,anotherValue")]
+		//[Emits(values = "value,anotherValue")]
+		//[Emits()]
 		public var __setValue:Function = function (_value:int):void {
 			this._value = _value;
 			this.anotherValue = "anotherValue::" + _value;
