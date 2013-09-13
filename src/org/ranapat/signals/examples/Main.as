@@ -74,10 +74,15 @@ package org.ranapat.signals.examples {
 			
 			//trace("#$$$$$$$$$$$$$$$$$$$$$$$")
 			
-			dispatchesExample = new DispatchesExample();
-			trace("link (2) result is " + Signals.link(dispatchesExample, dispatchesExample.__setValue/*DispatchesExample.ValueChangedSignal.get(Signals.__LINK__)*/, this.handleValueChanged, this));
-			dispatchesExample.doTheTest();
-			dispatchesExample.value = 100;
+			//dispatchesExample = new DispatchesExample();
+			//trace("link (2) result is " + Signals.link(dispatchesExample, dispatchesExample.__setValue/*DispatchesExample.ValueChangedSignal.get(Signals.__LINK__)*/, this.handleValueChanged, this));
+			//dispatchesExample.doTheTest();
+			//dispatchesExample.value = 100;
+			
+			var simpleDispatchExample:SimpleDispatchExample = new SimpleDispatchExample();
+			Signals.link(simpleDispatchExample, simpleDispatchExample.__setValue, this.handleSimpleDispatchExampleSetValue, this);
+			simpleDispatchExample.value = 10;
+			trace("the value is " + simpleDispatchExample.value)
 			
 			//Signals.connect(this.classA, Main.SignalMainA, new Slot(this.handleSignalMain), this);
 			//Signals.connect(this, this.SignalMainB, new Slot(this.handleSignalMain), this);
@@ -105,6 +110,10 @@ package org.ranapat.signals.examples {
 			this.simpleB = new SimpleB(this.simpleA);
 			this.simpleA.test(100);
 			*/
+		}
+		
+		public function handleSimpleDispatchExampleSetValue(_value:uint):void {
+			trace("the value is just changed " + _value)
 		}
 		
 		public function shot():void {
