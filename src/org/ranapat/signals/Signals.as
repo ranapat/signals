@@ -23,7 +23,25 @@ package org.ranapat.signals {
 			Tools.ensureAbstractClass(this, Signals);
 		}
 		
-		public static function connect(signalObject:Object, signal:Signal, slot:Slot, slotObject:Object, priority:int = 0, once:Boolean = false):void {
+		public static function connect(signal:Signal, slot:Slot, signalObject:Object = null, slotObject:Object = null, priority:int = 0, once:Boolean = false):void {
+			signalObject = signalObject? signalObject : signal.object;
+			slotObject = slotObject? slotObject : slot.object;
+			
+			if (!signalObject) {
+				trace("3:[Signals] :: connect :: signalObject is null, you might have leaks!");
+				if (!SignalsSettings.ALLOW_NULL_OBJECTS) {
+					trace("2:[Signals] :: connect :: SignalsSettings.ALLOW_NULL_OBJECTS is false, null objects rejected!");
+					return;
+				}
+			}
+			if (!slotObject) {
+				trace("3:[Signals] :: connect :: slotObject is null, you might have leaks!");
+				if (!SignalsSettings.ALLOW_NULL_OBJECTS) {
+					trace("2:[Signals] :: connect :: SignalsSettings.ALLOW_NULL_OBJECTS is false, null objects rejected!");
+					return;
+				}
+			}
+			
 			var tmp:SignalsCollection = Signals.dictionary[signalObject] as SignalsCollection;
 			tmp = tmp? tmp : new SignalsCollection();
 			
@@ -32,7 +50,7 @@ package org.ranapat.signals {
 			Signals.dictionary[signalObject] = tmp;
 		}
 		
-		public static function disconnect(object:Object, signal:Signal = null, slot:Slot = null):void {
+		public static function disconnect(object:Object = null, signal:Signal = null, slot:Slot = null):void {
 			var tmp:SignalsCollection = Signals.dictionary[object] as SignalsCollection;
 			if (tmp) {
 				if (signal != null) {
@@ -44,7 +62,9 @@ package org.ranapat.signals {
 			}
 		}
 		
-		public static function emit(object:Object, signal:Signal, parameters:Array = null):void {
+		public static function emit(signal:Signal, object:Object = null, parameters:Array = null):void {
+			object = object? object : signal.object;
+			
 			var tmp:SignalsCollection = Signals.dictionary[object] as SignalsCollection;
 			if (tmp) {
 				tmp.emit(signal, parameters);
@@ -56,7 +76,7 @@ package org.ranapat.signals {
 		}
 		
 		public static function connectNativeSignal(object:IEventDispatcher, event:String, signalObject:Object, signal:Signal, priority:int = 0, once:Boolean = false):Function {
-			var _function:Function = function (e:Event):void { Signals.emit( signalObject, signal, [ e ] ); };
+			var _function:Function = function (e:Event):void { Signals.emit( signal, signalObject, [ e ] ); };
 			object.addEventListener(event, _function, false, 0, true);
 			return _function;
 		}
@@ -79,7 +99,7 @@ package org.ranapat.signals {
 		public static function autoEmit(object:*, member:String):Boolean {
 			var result:Boolean = false;
 			
-			var _memberName:String = MetadataAnalyzer.getMemberName(object, member);
+			var _memberName:String = member;
 			var metatags:Vector.<XML> = MetadataAnalyzer.getMetaTags(object, member);
 			if (metatags.length > 0) {
 				for each (var metadata:XML in metatags) {
@@ -233,10 +253,10 @@ package org.ranapat.signals {
 							}
 							
 							if (_signal) {
-								Signals.connect
-									(object,
+								Signals.connect(
 									_signal,
-									new Slot(expression),
+									new Slot(expression, expressionHolder),
+									object,
 									expressionHolder,
 									priority, once
 								);
@@ -275,7 +295,7 @@ package org.ranapat.signals {
 						}
 					}
 					
-					Signals.emit(object, _signal, _params);
+					Signals.emit(_signal, object, _params);
 				};
 				
 				result = true;

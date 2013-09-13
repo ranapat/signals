@@ -38,51 +38,26 @@ package org.ranapat.signals.examples {
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
 			
-			//this.classA = new ClassA();
-			//this.classC = new ClassC();
-			//this.classB = new ClassB(this.classA, this.classC);
-			//this.classD = new ClassD();
+			/*
+			// Example 1 start
+			this.classA = new ClassA();
+			this.classC = new ClassC();
+			this.classB = new ClassB(this.classA, this.classC);
+			this.classD = new ClassD();
 			
-			//this.classA.doEmit();
-			//this.classA.doEmit();
+			this.classA.doEmit();
+			trace("\n")
+			this.classA.doEmit();
 			
-			//Signals.walk();
+			Signals.walk();
+			this.addChild(this.classC);
+			Signals.walk();
 			
-			//this.addChild(this.classC);
-			
-			
-			//Signals.walk();
-			
-			
-			
-			
-			
-			//Signals.connectNativeCallback(this, Event.ENTER_FRAME, this.handleEnterFrame);
-			
+			Signals.connectNativeCallback(this, Event.ENTER_FRAME, this.handleEnterFrame);
 			//addEventListener(Event.ENTER_FRAME, handleEnterFrame);
 			
-			/*
-			classD = new ClassD();
-			
-			
-			Signals.connect(classD, ClassD.SIGNAL, slot, this);
-			
-			
-			classD = null;
-			*/
-			
-			
-			//trace("#$$$$$$$$$$$$$$$$$$$$$$$")
-			
-			//dispatchesExample = new DispatchesExample();
-			//trace("link (2) result is " + Signals.link(dispatchesExample, dispatchesExample.__setValue/*DispatchesExample.ValueChangedSignal.get(Signals.__LINK__)*/, this.handleValueChanged, this));
-			//dispatchesExample.doTheTest();
-			//dispatchesExample.value = 100;
-			
-			var simpleDispatchExample:SimpleDispatchExample = new SimpleDispatchExample();
-			Signals.link(simpleDispatchExample, simpleDispatchExample.__setValue, this.handleSimpleDispatchExampleSetValue);
-			simpleDispatchExample.value = 10;
-			trace("the value is " + simpleDispatchExample.value)
+			//Signals.connect(ClassD.SIGNAL, slot);
+			//Signals.emit(ClassD.SIGNAL);
 			
 			//Signals.connect(this.classA, Main.SignalMainA, new Slot(this.handleSignalMain), this);
 			//Signals.connect(this, this.SignalMainB, new Slot(this.handleSignalMain), this);
@@ -105,11 +80,58 @@ package org.ranapat.signals.examples {
 			
 			//Signals.emit(this, this.SignalMainB);
 			
+			
+			// Example 1 end
+			*/
+			
 			/*
+			// Example 2 start
+			dispatchesExample = new DispatchesExample();
+			trace("link (2) result is " + Signals.link(dispatchesExample, dispatchesExample.__setValue, this.handleValueChanged, this));
+			dispatchesExample.doTheTest();
+			dispatchesExample.value = 100;
+			// Example 2 end
+			*/
+			
+			/*
+			// Example 3 start
+			var simpleDispatchExample:SimpleDispatchExample = new SimpleDispatchExample();
+			Signals.link(simpleDispatchExample, simpleDispatchExample.__setValue, this.handleSimpleDispatchExampleSetValue);
+			simpleDispatchExample.value = 10;
+			trace("the value is " + simpleDispatchExample.value)
+			// Example 3 end
+			*/
+			
+			/*
+			// Example 4 start
 			this.simpleA = new SimpleA();
 			this.simpleB = new SimpleB(this.simpleA);
 			this.simpleA.test(100);
+			// Example 4 end
 			*/
+			
+			/*
+			// Example 5 start
+			Signals.connect(this.SignalMainB, new Slot(this.handleStep5SignalMainB) );
+			this.SignalMainB.emit();
+			// Example 5 end
+			*/
+			
+			// Example 6 start
+			//SignalMainA.connect(this.handleStep6SignalMainB);
+			//SignalMainA.emit();
+			
+			Signals.connect(SignalMainA, new Slot(this.handleStep6SignalMainB));
+			Signals.emit(SignalMainA);
+			// Example 6 end
+		}
+		
+		public function handleStep6SignalMainB():void {
+			trace("step6 handler")
+		}
+		
+		public function handleStep5SignalMainB():void {
+			trace("step5 handler")
 		}
 		
 		public function handleSimpleDispatchExampleSetValue(_value:uint):void {
@@ -141,7 +163,12 @@ package org.ranapat.signals.examples {
 
 			this.classA = null;
 			this.classB = null;
+			
+			if (this.classC && this.classC.parent) {
+				this.classC.parent.removeChild(this.classC);
+			}
 			this.classC = null;
+			
 			this.classD = null;
 			this.classE = null;
 			

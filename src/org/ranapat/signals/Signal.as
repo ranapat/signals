@@ -1,4 +1,5 @@
 package org.ranapat.signals {
+	import flash.sampler.getSavedThis;
 	import flash.utils.Dictionary;
 	
 	public class Signal {
@@ -37,19 +38,21 @@ package org.ranapat.signals {
 		public function emit(...args):Boolean {
 			var result:Boolean = false;
 			var _object:Object = this.object;
-			if (_object) {
-				Signals.emit(_object, this, args);
+			if (_object || SignalsSettings.ALLOW_NULL_OBJECTS) {
+				Signals.emit(this, _object, args);
 				
 				result = true;
 			}
 			return result;
 		}
 		
-		public function connect(object:Object, callback:Function, priority:int = 0, once:Boolean = false):Boolean {
+		public function connect(callback:Function, object:Object = null, priority:int = 0, once:Boolean = false):Boolean {
+			object = object? object : getSavedThis(callback);
+			
 			var result:Boolean = false;
 			var _object:Object = this.object;
-			if (_object) {
-				Signals.connect(_object, this, new Slot(callback), object, priority, once);
+			if (_object || SignalsSettings.ALLOW_NULL_OBJECTS) {
+				Signals.connect(this, new Slot(callback, object), _object, object, priority, once);
 				
 				result = true;
 			}
@@ -59,7 +62,7 @@ package org.ranapat.signals {
 		public function disconnect(slot:Slot = null):Boolean {
 			var result:Boolean = false;
 			var _object:Object = this.object;
-			if (_object) {
+			if (_object || SignalsSettings.ALLOW_NULL_OBJECTS) {
 				Signals.disconnect(_object, this, slot);
 				
 				result = true;
@@ -67,7 +70,7 @@ package org.ranapat.signals {
 			return result;
 		}
 		
-		private function get object():Object {
+		public function get object():Object {
 			if (this.weak) {
 				for (var object:Object in this.weak) {
 					return object;

@@ -11,7 +11,7 @@ package org.ranapat.signals.examples {
 		}
 		
 		public function doEmit():void {
-			Signals.emit(this, ClassA.SIGNAL_A, [ "test1" ] );
+			Signals.emit(ClassA.SIGNAL_A, this, [ "test1" ] );
 		}
 		
 	}

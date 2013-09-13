@@ -14,11 +14,11 @@ package org.ranapat.signals.examples {
 		public static var dictionary:Dictionary = new Dictionary(true);
 		
 		public function ClassB(classA:ClassA, classC:ClassC) {
-			Signals.connect(classA, ClassA.SIGNAL_A, this.slot1, this, 1, false);
-			Signals.connect(classA, ClassA.SIGNAL_A, this.slot2, this, 2, false);
-			Signals.connect(classA, ClassA.SIGNAL_A, this.slot3, this, 3, true);
-			Signals.connect(classA, ClassA.SIGNAL_A, this.slot4, this, 4, false);
-			Signals.connect(classC, ClassA.SIGNAL_A, this.slot5, this, 0, false);
+			Signals.connect(ClassA.SIGNAL_A, this.slot1, classA, this, 1, false);
+			Signals.connect(ClassA.SIGNAL_A, this.slot2, classA, this, 2, false);
+			Signals.connect(ClassA.SIGNAL_A, this.slot3, classA, this, 0, true);
+			Signals.connect(ClassA.SIGNAL_A, this.slot4, classA, this, 4, false);
+			Signals.connect(ClassA.SIGNAL_A, this.slot5, classC, this, 0, false);
 		}
 		
 		public function handleSignal1(param:String):void {
