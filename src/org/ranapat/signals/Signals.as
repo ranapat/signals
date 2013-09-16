@@ -30,14 +30,14 @@ package org.ranapat.signals {
 			if (!signalObject) {
 				trace("3:[Signals] :: connect :: signalObject is null, you might have leaks!");
 				if (!SignalsSettings.ALLOW_NULL_OBJECTS) {
-					trace("2:[Signals] :: connect :: SignalsSettings.ALLOW_NULL_OBJECTS is false, null objects rejected!");
+					trace("2:[Signals] :: Signals::connect :: SignalsSettings.ALLOW_NULL_OBJECTS is false, null objects rejected!");
 					return;
 				}
 			}
 			if (!slotObject) {
 				trace("3:[Signals] :: connect :: slotObject is null, you might have leaks!");
 				if (!SignalsSettings.ALLOW_NULL_OBJECTS) {
-					trace("2:[Signals] :: connect :: SignalsSettings.ALLOW_NULL_OBJECTS is false, null objects rejected!");
+					trace("2:[Signals] :: Signals::connect :: SignalsSettings.ALLOW_NULL_OBJECTS is false, null objects rejected!");
 					return;
 				}
 			}

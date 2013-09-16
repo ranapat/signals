@@ -118,11 +118,11 @@ package org.ranapat.signals.examples {
 			*/
 			
 			// Example 6 start
-			//SignalMainA.connect(this.handleStep6SignalMainB);
-			//SignalMainA.emit();
-			
-			Signals.connect(SignalMainA, new Slot(this.handleStep6SignalMainB));
-			Signals.emit(SignalMainA);
+			SignalMainA.connect(this.handleStep6SignalMainB);
+			SignalMainA.emit();
+
+			//Signals.connect(SignalMainA, new Slot(this.handleStep6SignalMainB));
+			//Signals.emit(SignalMainA);
 			// Example 6 end
 		}
 		

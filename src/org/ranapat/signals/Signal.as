@@ -42,6 +42,8 @@ package org.ranapat.signals {
 				Signals.emit(this, _object, args);
 				
 				result = true;
+			} else if (!_object && !SignalsSettings.ALLOW_NULL_OBJECTS) {
+				trace("2:[Signals] :: Signal::emit :: SignalsSettings.ALLOW_NULL_OBJECTS is false, null objects rejected!");
 			}
 			return result;
 		}
@@ -55,6 +57,8 @@ package org.ranapat.signals {
 				Signals.connect(this, new Slot(callback, object), _object, object, priority, once);
 				
 				result = true;
+			} else if (!_object && !SignalsSettings.ALLOW_NULL_OBJECTS) {
+				trace("2:[Signals] :: Signal::connect :: SignalsSettings.ALLOW_NULL_OBJECTS is false, null objects rejected!");
 			}
 			return result;
 		}
@@ -66,6 +70,8 @@ package org.ranapat.signals {
 				Signals.disconnect(_object, this, slot);
 				
 				result = true;
+			} else if (!_object && !SignalsSettings.ALLOW_NULL_OBJECTS) {
+				trace("2:[Signals] :: Signal::disconnect :: SignalsSettings.ALLOW_NULL_OBJECTS is false, null objects rejected!");
 			}
 			return result;
 		}
