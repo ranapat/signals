@@ -36,9 +36,9 @@ package org.ranapat.signals {
 			return null;                                        
 		}
 		
-		public static function getFunctionName(f:Function):String {
+		public static function getFunctionName(f:Function, t:Object = null):String {
 			try {
-				var t:Object = getSavedThis(f);
+				t = t? t : getSavedThis(f);
 				var methods:XMLList = describeType(t)..method.@name;
 				for each (var m:String in methods) {
 					if (t.hasOwnProperty(m) && t[m] != null && t[m] === f) return m;            

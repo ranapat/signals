@@ -11,7 +11,7 @@ package org.ranapat.signals {
 			this.weak = new Dictionary(true);
 			this.weak[(object? object : getSavedThis(callback))] = 1;
 			
-			this.callbackName = Tools.getFunctionName(callback);
+			this.callbackName = Tools.getFunctionName(callback, this.object);
 		}
 		
 		public function getFunction(object:Object = null):Function {
