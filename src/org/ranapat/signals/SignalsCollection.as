@@ -63,7 +63,7 @@ package org.ranapat.signals {
 							var sssTmp:Function = ssTmp.getFunction(sTmp.key);
 							sssTmp.apply(null, Tools.arrayToFixedCount(sssTmp.length, parameters));
 						} catch (e:Error) {
-							trace("4:[Signals] Failed to call slot :: " + e);
+							trace("4:[Signals] Failed to call slot in " + sTmp.key + "::" + ssTmp.callbackName + " with reason " + e);
 						}
 						if (sTmp.once) {
 							tmp.splice(i, 1);
