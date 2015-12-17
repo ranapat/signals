@@ -48,15 +48,14 @@ package org.ranapat.signals {
 			return result;
 		}
 		
-		public function connect(callback:Function, object:Object = null, priority:int = 0, once:Boolean = false):Boolean {
+		public function connect(callback:Function, object:Object = null, priority:int = 0, once:Boolean = false):Slot {
 			object = object? object : getSavedThis(callback);
 			
-			var result:Boolean = false;
+			var result:Slot = null;
 			var _object:Object = this.object;
 			if (_object || SignalsSettings.ALLOW_NULL_OBJECTS) {
-				Signals.connect(this, new Slot(callback, object), _object, object, priority, once);
-				
-				result = true;
+				result = new Slot(callback, object);
+				Signals.connect(this, result, _object, object, priority, once);
 			} else if (!_object && !SignalsSettings.ALLOW_NULL_OBJECTS) {
 				trace("2:[Signals] :: Signal::connect :: SignalsSettings.ALLOW_NULL_OBJECTS is false, null objects rejected!");
 			}

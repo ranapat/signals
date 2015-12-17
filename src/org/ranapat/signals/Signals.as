@@ -62,6 +62,18 @@ package org.ranapat.signals {
 			}
 		}
 		
+		public static function massDisconnect(slotObject:Object):void {
+			var signalsCollection:SignalsCollection;
+			for (var object:Object in Signals.dictionary) {
+				signalsCollection = Signals.dictionary[object] as SignalsCollection;
+				if (signalsCollection) {
+					for (var signal:Object in signalsCollection.dictionary) {
+						signalsCollection.remove(signal as Signal, null, slotObject);
+					}
+				}
+			}
+		}
+		
 		public static function emit(signal:Signal, object:Object = null, parameters:Array = null):void {
 			object = object? object : signal.object;
 			

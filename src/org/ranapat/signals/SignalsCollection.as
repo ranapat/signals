@@ -2,7 +2,7 @@ package org.ranapat.signals {
 	import flash.utils.Dictionary;
 	
 	internal final class SignalsCollection {
-		private var dictionary:Dictionary;
+		public var dictionary:Dictionary;
 		
 		public function SignalsCollection() {
 			this.dictionary = new Dictionary(true);
@@ -29,16 +29,20 @@ package org.ranapat.signals {
 			this.dictionary[signal] = tmp;
 		}
 		
-		public function remove(signal:Signal, slot:Slot = null):void {
+		public function remove(signal:Signal, slot:Slot = null, slotObject:Object = null):void {
 			var tmp:Vector.<SlotObject> = this.dictionary[signal] as Vector.<SlotObject>;
 			
 			if (tmp) {
-				if (slot != null) {
+				if (slot != null || slotObject != null) {
 					var length:uint = tmp.length;
 					for (var i:uint = 0; i < length; ++i) {
-						if (tmp[i].slot == slot) {
+						if (slot != null && tmp[i].slot == slot) {
 							tmp.splice(i, 1);
 							break;
+						} else if (slotObject != null && tmp[i].key == slotObject) {
+							tmp.splice(i, 1);
+							--i;
+							--length;
 						}
 					}
 					

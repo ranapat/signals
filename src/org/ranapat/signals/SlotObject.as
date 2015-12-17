@@ -10,14 +10,14 @@ package org.ranapat.signals {
 		}
 		
 		public function get value():SlotInternalObject {
-			for (var object:* in this.dictionary) {
+			for (var object:Object in this.dictionary) {
 				return this.dictionary[object] as SlotInternalObject;
 			}
 			return null;
 		}
 		
-		public function get key():* {
-			for (var object:* in this.dictionary) {
+		public function get key():Object {
+			for (var object:Object in this.dictionary) {
 				return object;
 			}
 			return null;
